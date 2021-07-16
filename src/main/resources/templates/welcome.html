@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>eG JVM Monitoring Demo</title>
+		<link href="../webjars/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />
+ 		<script src="../webjars/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
+ 		<script src="../webjars/jquery/3.0.0/js/jquery.min.js" ></script>
+	</head>
+	<body>
+		<script>
+			function deadLockFunction() {
+			  var r = confirm("Deadlock can not be stopped once started, press ok to start!");
+			  if (r == true) {
+				  document.location='/eGJvmDemo/deadlock/start';
+			  } else {
+				  document.location='/eGJvmDemo/list';
+			  }
+			}
+		</script>
+
+		<div class="container">
+			<div class="header-navi"> 
+	  			<div class="row">
+	   				 <div class="col-12">
+	      				<div class="card">
+	         				<div class="card-body text-center">
+	         					<a th:href="@{https://www.eginnovations.com/}">
+	         						<img width="100px" height="100px" th:alt="eg-innovations-logo" th:src="@{${'/images/eg-enterprise.jpg'}}"> </a>
+	          					<h5 class="card-title m-b-0" th:text="${message.heading}"></h5>
+	         				</div>
+	     					<div class="table-responsive">
+	     					</div>
+	     				</div>
+	     			</div>
+	     		</div>
+	     	</div>
+	     	
+	     	<div class="table-responsive">
+			  <table class="table table-bordered table-hover table-striped table-sm">
+				<thead class="thead-dark">
+				  <tr>
+					<th scope="col">S.No</th>
+					<th scope="col">Demo Type</th>
+					<th scope="col">Status</th>
+					<th scope="col">Actions</th>
+				  </tr>
+				</thead>
+				<tbody>
+				  <tr>
+					<td>1</td>
+					<td>CPU utilizing threads</td>
+					<td><img th:src="@{${'/images/' + message.highcpuStatus + '.gif'}}"></td>
+					<td>
+					  <input type="button" class="btn btn-secondary btn-sm" th:value="Start" th:disabled="${message.highcpuStartDisabled == 'disabled'}" th:onclick="location.href='/eGJvmDemo/cpu/start'">
+					  <!-- <span class="glyphicon glyphicon-stop"></span> Start</button> -->
+					  <input  type="button" class="btn btn-secondary btn-sm" th:value="Stop" th:disabled="${message.highcpuStopDisabled == 'disabled'}" th:onclick="location.href='/eGJvmDemo/cpu/stop'">
+					  <!-- <span class="glyphicon glyphicon-stop"></span> Stop</button> -->
+					</td>
+				  </tr>
+				  <tr>
+					<td>2</td>
+					<td>CPU utilizing due to GC</td>
+					<td><img th:src="@{${'/images/' + message.highcpuGcStatus + '.gif'}}"></td>
+					<td>
+					  <input type="button" class="btn btn-secondary btn-sm" th:value="Start" th:disabled="${message.highcpuGcStartDisabled == 'disabled'}" th:onclick="location.href='/eGJvmDemo/cpugc/start'">
+					  <!--  <span class="glyphicon glyphicon-stop"></span> Start</button> -->
+					  <input type="button" class="btn btn-secondary btn-sm" th:value="Stop" th:disabled="${message.highcpuGcStopDisabled == 'disabled'}" th:onclick="location.href='/eGJvmDemo/cpugc/stop'">
+					  <!-- <span class="glyphicon glyphicon-stop"></span> Stop</button> -->
+					</td>
+				  </tr>
+				  
+				  <tr>
+					<td>3</td>
+					<td>Blocked threads</td>
+					<td><img th:src="@{${'/images/' + message.blockedStatus + '.gif'}}"></td>
+					<td>
+					  <input type="button" class="btn btn-secondary btn-sm" th:value="Start" th:disabled="${message.blockedStartDisabled == 'disabled'}" th:onclick="location.href='/eGJvmDemo/blocked/start'">
+<!-- 					  <span class="glyphicon glyphicon-stop"></span> Start</button> -->
+					  <input type="button" class="btn btn-secondary btn-sm" th:value="Stop" th:disabled="${message.blockedStopDisabled =='disabled'}" th:onclick="location.href='/eGJvmDemo/blocked/stop'">
+<!-- 					  <span class="glyphicon glyphicon-stop"></span> Stop</button> -->
+					</td>
+				  </tr>
+				  <tr>
+					<td>4</td>
+					<td>Waiting threads</td>
+					<td><img th:src="@{${'/images/' + message.waitedStatus + '.gif'}}"></td>
+					<td>
+					  <input type="button" class="btn btn-secondary btn-sm" th:value="Start" th:disabled="${message.waitedStartDisabled == 'disabled'}" th:onclick="location.href='/eGJvmDemo/waited/start'">
+<!-- 					  <span class="glyphicon glyphicon-stop"></span> Start</button> -->
+					  <input type="button" class="btn btn-secondary btn-sm" th:value="Stop" th:disabled="${message.waitedStopDisabled == 'disabled'}" th:onclick="location.href='/eGJvmDemo/waited/stop'">
+<!-- 					  <span class="glyphicon glyphicon-stop"></span> Stop</button> -->
+					</td>
+				  </tr>
+				  <tr>
+					<td>5</td>
+					<td>Deadlock threads</td>
+					<td><img th:src="@{${'/images/' + message.deadlockStatus + '.gif'}}"></td>
+					 <td>
+					  <input type="button" class="btn btn-secondary btn-sm" th:value="Start" th:disabled="${message.deadlockStartDisabled =='disabled'}" th:onclick="deadLockFunction()">
+<!-- 					  <span class="glyphicon glyphicon-stop"></span> Start</button> -->
+					  <input type="button" class="btn btn-secondary btn-sm" th:value="Stop" disabled th:onclick="location.href='/eGJvmDemo/deadlock/stop'">
+<!-- 					  <span class="glyphicon glyphicon-stop"></span> Stop</button> -->
+					</td>
+				  </tr>
+				   <tr>
+					<td>6</td>
+					<td>Memory leak</td>
+					<td><img th:src="@{${'/images/' + message.memoryLeakStatus + '.gif'}}"></td>
+					 <td>
+					  <input type="button" class="btn btn-secondary btn-sm" th:value="Start" th:disabled="${message.memoryLeakStartDisabled == 'disabled'}" th:onclick="location.href='/eGJvmDemo/mleak/start'">
+<!-- 					  <span class="glyphicon glyphicon-stop"></span> Start</button> -->
+					  <input type="button" class="btn btn-secondary btn-sm" th:value="Stop" th:disabled="${message.memoryLeakStopDisabled == 'disabled'}" th:onclick="location.href='/eGJvmDemo/mleak/stop'">
+<!-- 					  <span class="glyphicon glyphicon-stop"></span> Stop</button> -->
+					</td>
+				  </tr>
+				  <tr>
+					<td>7</td>
+					<td>Embedded datasource</td>
+					<td><img th:src="@{${'/images/' + message.dataSourceStatus + '.gif'}}"></td>
+					 <td>
+					  <input type="button" class="btn btn-secondary btn-sm" th:value="Start" th:disabled="${message.dataSourceStartDisabled =='disabled'}" th:onclick="location.href='/eGJvmDemo/dataSource/start'">
+					  <!-- <span class="glyphicon glyphicon-stop"></span> Start</button> -->
+					  <input type="button" class="btn btn-secondary btn-sm" th:value="Stop" th:disabled="${message.dataSourceStopDisabled == 'disabled'}" th:onclick="location.href='/eGJvmDemo/dataSource/stop'">
+					  <!-- <span class="glyphicon glyphicon-stop"></span> Stop</button> -->
+					</td>
+				  </tr>
+				  
+				</tbody>
+			  </table>
+		  	</div>
+     		
+     		<div class="container">
+			    <p>Copyright © 2021 eG Innovations. All rights reserved.</p>
+			    <p><a href="https://www.eginnovations.com/company/privacy-policy" target="_self">Privacy Policy</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://www.eginnovations.com/company/terms-of-use" target="_self">Terms of Use</a></p>
+			    <div class="clear-fix">&nbsp;</div>
+		 	</div>
+     	</div>
+	</body>
+</html>
