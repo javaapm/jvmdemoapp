@@ -15,6 +15,7 @@ import com.demo.jvm.eg.service.GcHighCpuService;
 import com.demo.jvm.eg.service.HighCPUService;
 import com.demo.jvm.eg.service.MemoryLeakService;
 import com.demo.jvm.eg.service.WaitedThreadService;
+import com.demo.jvm.eg.service.SlowMemoryLeakService;
 
 @RestController
 @RequestMapping("/eGJvmDemo")
@@ -40,6 +41,9 @@ public class DemoController {
 	
 	@Autowired
 	DataSourceService dataSourceService;
+
+	@Autowired
+	SlowMemoryLeakService slowMemLeakService;
 	
 	@RequestMapping(value= {"","/","/list"},method=RequestMethod.GET)
 	public ModelAndView getIndexPage() {
@@ -54,8 +58,21 @@ public class DemoController {
 		gcHighCpuService.updateStatus(data);
 		memoryLeakService.updateStatus(data);
 		dataSourceService.updateStatus(data);
+		slowMemLeakService.updateStatus(data);
 		return new ModelAndView("welcome","message", data);
 	}
+
+	@RequestMapping(value="/slowMemLeak/start", method=RequestMethod.GET)
+	 public ModelAndView startSlowMemLeakDemo() {
+		 slowMemLeakService.start();
+		 return new ModelAndView("redirect:/eGJvmDemo/list");
+	 }
+	 
+	 @RequestMapping(value="/slowMemLeak/stop", method=RequestMethod.GET)
+	 public ModelAndView stopSlowMemLeakDemo() {
+		 slowMemLeakService.stop();
+		 return new ModelAndView("redirect:/eGJvmDemo/list");
+	 }
 	
 	 @RequestMapping(value="/blocked/start", method=RequestMethod.GET)
 	 public ModelAndView startBlockedDemo() {

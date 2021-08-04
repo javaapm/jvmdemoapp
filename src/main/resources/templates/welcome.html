@@ -129,6 +129,18 @@
 					  <!-- <span class="glyphicon glyphicon-stop"></span> Stop</button> -->
 					</td>
 				  </tr>
+
+				   <tr>
+					<td>8</td>
+					<td>Slow Memory Leak</td>
+					<td><img th:src="@{${'/images/' + message.memLeakGcStatus + '.gif'}}"></td>
+					<td>
+					  <input type="button" class="btn btn-secondary btn-sm" th:value="Start" th:disabled="${message.memLeakGcStartDisabled == 'disabled'}" th:onclick="location.href='/eGJvmDemo/slowMemLeak/start'">
+					  <!--  <span class="glyphicon glyphicon-stop"></span> Start</button> -->
+					  <input type="button" class="btn btn-secondary btn-sm" th:value="Stop" th:disabled="${message.memLeakGcStopDisabled == 'disabled'}" th:onclick="location.href='/eGJvmDemo/slowMemLeak/stop'">
+					  <!-- <span class="glyphicon glyphicon-stop"></span> Stop</button> -->
+					</td>
+				  </tr>
 				  
 				</tbody>
 			  </table>
