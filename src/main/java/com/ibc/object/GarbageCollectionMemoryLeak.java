@@ -55,10 +55,7 @@ public class GarbageCollectionMemoryLeak extends Thread {
 						all.add(l3);
 						String [] l4 = l.clone();
 						all.add(l4);
-						String [] l5 = l.clone();
-						all.add(l5);
-						String [] l6 = l.clone();
-						all.add(l6);
+
 					
 					 }
 
