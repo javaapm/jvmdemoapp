@@ -52,17 +52,17 @@ public class GarbageCollectionMemoryLeak extends Thread {
 
 					 }
 
-					 if(shortCounter >= 1000 && longCounter <=100000)
+					 if(shortCounter >= 1000 && longCounter <=10000000)
 					{
 						shortCounter = 0;
 						//rt.gc();
 					}
-					 if(false) {
+					 if(true) {
 						 Thread.sleep(100);  
 					 }
 
-					 if(shortCounter > 1000)
-						 shortCounter = 0;
+					// if(shortCounter > 1000)
+						 //shortCounter = 0;
 				}
 				catch(InterruptedException ie) {
 					System.out.println("IT is Interrupted !!!!");
@@ -82,8 +82,8 @@ public class GarbageCollectionMemoryLeak extends Thread {
 		lst[0] = new long[256*128]; // 1/4 MB
 		lst[1] = new int[256*256]; // 1/4 MB
 		lst[2] = new double[256*128]; // 1/4 MB
-		//lst[3] = new float[64*256]; // 1/16 MB
-		//lst[4] = new byte[64*1024]; // 1/16 MB
+		lst[3] = new float[64*256]; // 1/16 MB
+		lst[4] = new byte[64*1024]; // 1/16 MB
 		//String[] l = new String[64*64]; // 1/16 MB
 		//for (int i=0; i<64*64; i++) 
 			 //l[i] = new String("12345678"); // 16B
