@@ -49,10 +49,7 @@ public class GarbageCollectionMemoryLeak extends Thread {
 						all.add(l);
 						String [] l1 = l.clone();
 						all.add(l1);
-						String [] l2 = l.clone();
-						all.add(l2);
-						String [] l3 = l.clone();
-						all.add(l3);
+
 					 }
 
 					 if(shortCounter >= 1000 && longCounter <=100000)
@@ -61,7 +58,7 @@ public class GarbageCollectionMemoryLeak extends Thread {
 						//rt.gc();
 					}
 					 if(false) {
-						 Thread.sleep(1000);  
+						 Thread.sleep(100);  
 					 }
 
 					 if(shortCounter > 1000)
