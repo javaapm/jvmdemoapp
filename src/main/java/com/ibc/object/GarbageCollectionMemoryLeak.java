@@ -58,10 +58,10 @@ public class GarbageCollectionMemoryLeak extends Thread {
 					 if(shortCounter >= 1000 && longCounter <=100000)
 					{
 						shortCounter = 0;
-						rt.gc();
+						//rt.gc();
 					}
 					 if(false) {
-						 Thread.sleep(1);  
+						 Thread.sleep(1000);  
 					 }
 
 					 if(shortCounter > 1000)
