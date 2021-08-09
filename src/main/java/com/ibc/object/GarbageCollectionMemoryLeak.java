@@ -22,6 +22,7 @@ public class GarbageCollectionMemoryLeak extends Thread {
 			Runtime rt = Runtime.getRuntime();
 			long shortCounter = 0;
 			long longCounter = 0;
+			long midCounter = 0;
 			//System.out.println("Step/TotalMemory/FreeMemory/UsedMemory:");
 			while(!terminate) {
 				
@@ -52,13 +53,13 @@ public class GarbageCollectionMemoryLeak extends Thread {
 
 					 }
 
-					 if(shortCounter >= 100 && longCounter <=10000000)
+					 if(midCounter >= 10000 && longCounter <=10000000)
 					{
-						shortCounter = 0;
-						//rt.gc();
+						midCounter = 0;
+						rt.gc();
 					}
 					 if(true) {
-						 Thread.sleep(100);  
+						 Thread.sleep(10);  
 					 }
 
 					if(shortCounter > 100)
@@ -73,6 +74,7 @@ public class GarbageCollectionMemoryLeak extends Thread {
 				}
 				shortCounter++;
 				longCounter++;
+				midCounter++;
 			}
 		}
 
@@ -82,8 +84,8 @@ public class GarbageCollectionMemoryLeak extends Thread {
 		lst[0] = new long[256*128]; // 1/4 MB
 		lst[1] = new int[256*256]; // 1/4 MB
 		lst[2] = new double[256*128]; // 1/4 MB
-		lst[3] = new float[64*256]; // 1/16 MB
-		lst[4] = new byte[64*1024]; // 1/16 MB
+		//lst[3] = new float[64*256]; // 1/16 MB
+		//lst[4] = new byte[64*1024]; // 1/16 MB
 		//String[] l = new String[64*64]; // 1/16 MB
 		//for (int i=0; i<64*64; i++) 
 			 //l[i] = new String("12345678"); // 16B
