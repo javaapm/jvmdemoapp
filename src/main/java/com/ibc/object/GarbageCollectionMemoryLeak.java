@@ -42,7 +42,7 @@ public class GarbageCollectionMemoryLeak extends Thread {
 					 } catch (InterruptedException e) {
 						System.out.println("Interreupted...");
 					 }*/
-					 if(shortCounter == 1000){
+					 if(shortCounter == 100){
 						String[] l = new String[64*64]; // 1/16 MB
 						for (int i=0; i<64*64; i++) 
 							l[i] = new String("12345678"); // 16B
@@ -52,7 +52,7 @@ public class GarbageCollectionMemoryLeak extends Thread {
 
 					 }
 
-					 if(shortCounter >= 1000 && longCounter <=10000000)
+					 if(shortCounter >= 100 && longCounter <=10000000)
 					{
 						shortCounter = 0;
 						//rt.gc();
@@ -61,7 +61,7 @@ public class GarbageCollectionMemoryLeak extends Thread {
 						 Thread.sleep(100);  
 					 }
 
-					if(shortCounter > 1000)
+					if(shortCounter > 100)
 						 shortCounter = 0;
 				}
 				catch(InterruptedException ie) {
