@@ -58,11 +58,11 @@ public class GarbageCollectionMemoryLeak extends Thread {
 						//rt.gc();
 					}
 					 if(true) {
-						 Thread.sleep(100);  
+						 Thread.sleep(1000);  
 					 }
 
-					// if(shortCounter > 1000)
-						 //shortCounter = 0;
+					if(shortCounter > 1000)
+						 shortCounter = 0;
 				}
 				catch(InterruptedException ie) {
 					System.out.println("IT is Interrupted !!!!");
